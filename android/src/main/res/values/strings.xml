@@ -1,0 +1,27 @@
+<resources>
+    <string name="scan_recto_cin">Veuillez cadrer le recto de votre CIN</string>
+    <string name="scan_verso_cin">Veuillez cadrer le verso de votre CIN</string>
+    <string name="version_sdk"> [version 12.1.23]</string>
+    <string name="detect_cin">Veuillez cadrer le recto et de vous rapprocher du CIN</string>
+    <string name="detect_cin_msg">Votre CIN est bien vérifiée</string>
+    <string name="not_detected_cin_msg">Vous devez scanner une carte CIN originale</string>
+    <string name="use_real_card">Veuillez utiliser une carte CIN originale</string>
+    <string name="secouer_cin">Veuillez secouer votre CIN</string>
+    <string name="scan_msg_1">Veuillez éviter les réflexions de la lumière sur la carte</string>
+    <string name="scan_msg_2">Veuillez vous assurer que la position de la carte scannée respecte le rectangle et qu\'aucun champ de la carte n\'est caché</string>
+    <string name="passons_au_verso">Passons au verso !</string>
+    <string name="scan_verso_success">Le scan du recto a été effectué avec succès</string>
+    <string name="scan_msg_success">Le scan de votre pièce d\'identité\n a été effectué avec succès !</string>
+    <string name="annuler">Annuler</string>
+    <string name="continuer">Continuer</string>
+    <string name="no_face_detected">Aucun visage détecté</string>
+    <string name="trop_visage">Trop de visages</string>
+    <string name="blink">Veuillez cligner les yeux</string>
+    <string name="look_straight">merci de se positionner face à la caméra</string>
+    <string name="demande_de_recadrage">Veuillez recadrer votre carte CIN</string>
+    <string name="reessayer">Réessayer</string>
+    <string name="recto_scanned">Scan du recto est bien réussi</string>
+    <string name="validate_cin">Pour vérifier l\'authenticité de la CIN,\nassurez-vous que la carte est bien cadrée lors du scan</string>
+    <string name="visage_non_detectee">Impossible de détecter un visage sur la carte CIN</string>
+    <string name="rescanner">Rescanner</string>
+</resources>
