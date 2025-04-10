@@ -1,3 +1,70 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.adria.adria_kyc_integration">
+xmlns:tools="http://schemas.android.com/tools"
+android:installLocation="auto">
+
+
+<!--    V1-->
+<!-- Permissions -->
+<!--    <uses-permission android:name="android.permission.CAMERA" />-->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission android:name="android.permission.INTERNET" />-->
+<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+<!-- Déclare que la caméra est une fonctionnalité optionnelle -->
+<!--    <uses-feature android:name="android.hardware.camera" android:required="false"/>-->
+<!--    <uses-feature android:name="android.hardware.camera.any" />-->
+
+<!--    V2-->
+<uses-feature android:name="android.hardware.camera.any" />
+
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+<meta-data
+    android:name="com.google.android.gms.version"
+    android:value="@integer/google_play_services_version" />
+<meta-data
+    android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+    android:value="face,ocr" />
+<meta-data
+    android:name="firebase_crashlytics_collection_enabled"
+    android:value="false" />
+
+<application
+    android:name="${applicationName}"
+    android:icon="@mipmap/ic_launcher">
+
+
+    <!-- Déclaration de l'activité ScanNewCinActivity -->
+    <activity
+        android:name="com.adria.adria_kyc_integration.adriascancinlibrary.CameraXActivity"
+        android:screenOrientation="landscape"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
+    <activity android:name="com.adria.adria_kyc_integration.adriascancinlibrary.ScanNewCinActivity"
+        android:screenOrientation="landscape"
+        android:exported="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+    <activity android:name="com.adria.adria_kyc_integration.adriascancinlibrary.ScanOldCinActivity"
+        android:exported="true"
+        android:screenOrientation="landscape"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
+    <activity android:name="com.adria.adria_kyc_integration.adriascancinlibrary.facedetection.FaceActivity"
+        android:screenOrientation="landscape"
+        android:exported="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+    <meta-data
+        android:name="flutterEmbedding"
+        android:value="2" />
+</application>
+
+<queries>
+    <intent>
+        <action android:name="android.intent.action.PROCESS_TEXT"/>
+        <data android:mimeType="text/plain"/>
+    </intent>
+</queries>
 </manifest>

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:adria_kyc_integration/adria_kyc_integration.dart';
 
@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _scanResult = '';
   final _adriaKycIntegrationPlugin = AdriaKycIntegration();
 
   @override
@@ -25,11 +26,8 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
     try {
       platformVersion =
           await _adriaKycIntegrationPlugin.getPlatformVersion() ?? 'Unknown platform version';
@@ -37,13 +35,31 @@ class _MyAppState extends State<MyApp> {
       platformVersion = 'Failed to get platform version.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
       _platformVersion = platformVersion;
+    });
+  }
+
+  Future<void> _scanOldCin() async {
+    final result = await _adriaKycIntegrationPlugin.scanOldCin();
+    setState(() {
+      _scanResult = result != null ? jsonEncode(result) : 'No data';
+    });
+  }
+
+  Future<void> _scanNewCin() async {
+    final result = await _adriaKycIntegrationPlugin.scanNewCin();
+    setState(() {
+      _scanResult = result != null ? jsonEncode(result) : 'No data';
+    });
+  }
+
+  Future<void> _faceRecognition() async {
+    final result = await _adriaKycIntegrationPlugin.faceRecognition();
+    setState(() {
+      _scanResult = result ?? 'No data';
     });
   }
 
@@ -52,10 +68,38 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('KYC Plugin Example'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text('Platform Version: $_platformVersion'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _scanOldCin,
+                child: const Text('Scan Old CIN'),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _scanNewCin,
+                child: const Text('Scan New CIN'),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _faceRecognition,
+                child: const Text('Face Recognition'),
+              ),
+              const SizedBox(height: 30),
+              const Text('Scan Result:'),
+              const SizedBox(height: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Text(_scanResult),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
